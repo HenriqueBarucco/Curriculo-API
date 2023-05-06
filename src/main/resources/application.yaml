@@ -11,6 +11,11 @@ swagger:
 curriculo:
     data: https://henriquebarucco.github.io/Curriculo-API/data.json
 
+springdoc:
+    swagger-ui:
+        disable-swagger-default-url: true
+        path: "/"
+
 server:
   error:
     include-stacktrace: never

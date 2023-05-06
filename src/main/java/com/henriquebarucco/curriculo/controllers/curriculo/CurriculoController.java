@@ -23,7 +23,7 @@ public class CurriculoController {
         summary = "Consultar todo o curriculo.",
         description = "Consulta de todas as informações do curriculo."
     )
-    @GetMapping()
+    @GetMapping(value = "/all")
     public ResponseEntity<Curriculo> curriculo() {
         Curriculo curriculo = curriculoService.findAll();
         return ResponseEntity.ok().body(curriculo);
