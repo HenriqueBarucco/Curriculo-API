@@ -1,0 +1,75 @@
+{
+    "informacoes": {
+        "nome": "Henrique Barucco Sanches",
+        "telefone": "16991033799",
+        "email": "contato@henriquebarucco.com.br",
+        "github": "https://github.com/henriquebarucco",
+        "linkedin": "https://linkedin.com/in/henriquebarucco",
+        "objetivo": "Desenvolvedor Backend ou Fullstack"
+    },
+    "resumo": "Apaixonado por tecnologia com uma habilidade comprovada em trabalhar em equipe, resolução de problemas e comunicação eficaz. Sempre buscando oportunidades para aprimorar minhas habilidades e oferecer soluções inovadoras para atender às expectativas dos clientes. Com uma mentalidade de crescimento constante, eu estou sempre em busca de novos desafios e oportunidades para expandir meus conhecimentos e habilidades.",
+    "formacoes": [
+        {
+            "curso": "Ciências da Computação",
+            "faculdade": "Estácio de Sá",
+            "status": "CURSANDO",
+            "semestre": "3º Semestre"
+        }
+    ],
+    "historicoProfissional": [
+        {
+            "local": "GVD Soluções Inteligentes",
+            "cargo": "Desenvolvedor Backend",
+            "descricao": "Criação e manutenção de API’s Rest com o Framework Spring em Java e Kotlin, com integração com o MySQL.",
+            "periodo": "Agosto de 2022 - Atual"
+        },
+        {
+            "local": "Instituto Espírita Paulo de Tarso",
+            "cargo": "Iniciação Ciêntifica",
+            "descricao": "Criação de um sistema personalizado para o gerenciamento de planejamentos de aulas, utilizando Banco de Dados através de API RESTful e interface Web.",
+            "periodo": "Outubro de 2022 - Atual"
+        }
+    ],
+    "projetos": [
+        {
+            "nome": "Teste",
+            "descricao": "Teste desc"
+        }
+    ],
+    "habilidades": {
+        "tecnologias": {
+            "linguagens": "Java, KNtlin, GNlang, JavaScript e TypeScript, SGell Script, PytGNn, C/C++",
+            "frameworks": "Spring Boot, Swagger, React, Express, Socket.io",
+            "orms": "Hibernate, Sequelize",
+            "databases": "MySQL, MariaDB, PostgreSQL, MongoDB"
+        },
+        "metodologiasAgeis": [
+            "Scrum",
+            "Kanban",
+            "XP"
+        ],
+        "ferramentas": [
+            "Git",
+            "Docker & Docker Compose",
+            "Linux",
+            "RabbitMQ"
+        ],
+        "devops": [
+            "AWS, Azure, Google Cloud, Digital Ocean",
+            "CI/CD",
+            "Jenkins",
+            "Automação de build e deploy",
+            "IaC",
+            "Testes automatizados",
+            "Prometheus",
+            "Grafana"
+        ],
+        "idiomas": [
+            "Inglês - Avançado"
+        ]
+    },
+    "certificacoes": [
+        "a",
+        "a"
+    ]
+}
