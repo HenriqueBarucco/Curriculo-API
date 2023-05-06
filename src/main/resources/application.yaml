@@ -1,0 +1,16 @@
+spring:
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+
+swagger:
+  openapi:
+    dev-url: http://localhost:8080
+    prod-url: https://curriculo-api.henriquebarucco.com.br
+    
+curriculo:
+    data: https://gist.githubusercontent.com/HenriqueBarucco/f6fad9c3cf3d67bf55b9558986c4613c/raw/4b91028bbbfb46813a31204cdf239b3757fabee7/gistfile1.txt
+
+server:
+  error:
+    include-stacktrace: never
