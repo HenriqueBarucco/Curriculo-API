@@ -58,6 +58,8 @@ public class ContatoService {
         IPinfo ipInfo = new IPinfo.Builder().setToken(token_ip).build();
         
         IPResponse response = ipInfo.lookupIP(ipAddress);
+
+        System.out.println(response);
         
         sb.append("Nova mensagem do Currículo-API:\n\n");
         sb.append(contato.mensagem());
