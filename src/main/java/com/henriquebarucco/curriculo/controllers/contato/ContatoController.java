@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.ws.rs.core.Context;
 
 @EnableWebMvc
 @Tag(name = "Entre em contato", description = "Endpoints para buscar o Currículo inteiro ou apenas as partes necessárias.")
@@ -22,7 +23,7 @@ public class ContatoController {
     
     @Operation(summary = "Entre em contato comigo.", description = "Envie uma mensagem agora mesmo para o meu WhatsApp, basta informar nos campos a mensagem e pronto, chegará em meu WhatsApp Pessoal.")
     @PostMapping(value = "/contato")
-    public ResponseEntity<String> curriculo(HttpServletRequest request, @RequestParam String mensagem, @RequestParam String nome, @RequestParam String contato) {
+    public ResponseEntity<String> curriculo(@Context HttpServletRequest request, @RequestParam String mensagem, @RequestParam String nome, @RequestParam String contato) {
         Contato sendContato = new Contato(mensagem, nome, contato);
         String userIpAddress = request.getHeader("CF-Connecting-IP");
         contatoService.sendMessage(sendContato);
