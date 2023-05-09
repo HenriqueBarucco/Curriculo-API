@@ -1,5 +1,7 @@
 package com.henriquebarucco.curriculo.services;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.henriquebarucco.curriculo.entities.contato.Contato;
 import com.henriquebarucco.curriculo.services.exceptions.CouldNotSendWhatsApp;
 import io.ipinfo.api.IPinfo;
@@ -9,6 +11,12 @@ import jakarta.servlet.http.HttpServletRequest;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+
+import javax.json.JsonObject;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 @Service
 public class ContatoService {
@@ -26,7 +34,7 @@ public class ContatoService {
     @Value("${curriculo.token}")
     private String token;
     
-    public void sendMessage(HttpServletRequest request, Contato contato) {
+    public void sendMessage(Contato contato) {
         try {
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             
@@ -34,7 +42,7 @@ public class ContatoService {
             sb.append("id=");
             sb.append(telefone);
             sb.append("&message=");
-            sb.append(this.message(contato, request.getRemoteAddr()));
+            sb.append(this.message(contato, this.getClientIp()));
             
             RequestBody body = RequestBody.create(mediaType, sb.toString());
             Request requestApi = new Request.Builder()
@@ -64,5 +72,23 @@ public class ContatoService {
         sb.append("\n\n" + response.getCity());
         
         return sb.toString();
+    }
+
+    private String getClientIp() throws Exception {
+        URL url = new URL("http://ip-api.com/json/?fields=query");
+        HttpURLConnection con = (HttpURLConnection) url.openConnection();
+        con.setRequestMethod("GET");
+        con.setRequestProperty("Content-Type", "application/json");
+        BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+        String inputLine;
+        StringBuffer response = new StringBuffer();
+        while ((inputLine = in.readLine()) != null) {
+            response.append(inputLine);
+        }
+        in.close();
+        JsonObject jsonObject = new Gson().fromJson(response.toString(), JsonObject.class);
+        JsonElement jsonElement = (JsonElement) jsonObject.get("query");
+        String ipAddress = jsonElement.getAsString();
+        return ipAddress;
     }
 }
