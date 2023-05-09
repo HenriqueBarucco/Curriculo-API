@@ -12,6 +12,7 @@ curriculo:
     data: https://henriquebarucco.github.io/Curriculo-API/data.json
     api: ${API_URL}
     token: ${TOKEN}
+    token_ip: ${TOKEN_IP}
     telefone: ${TELEFONE}
 
 springdoc:

@@ -2,6 +2,10 @@ package com.henriquebarucco.curriculo.services;
 
 import com.henriquebarucco.curriculo.entities.contato.Contato;
 import com.henriquebarucco.curriculo.services.exceptions.CouldNotSendWhatsApp;
+import io.ipinfo.api.IPinfo;
+import io.ipinfo.api.errors.RateLimitedException;
+import io.ipinfo.api.model.IPResponse;
+import jakarta.servlet.http.HttpServletRequest;
 import okhttp3.*;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -9,7 +13,10 @@ import org.springframework.stereotype.Service;
 @Service
 public class ContatoService {
     private final OkHttpClient client = new OkHttpClient().newBuilder().build();
-
+    
+    @Value("${curriculo.token_ip}")
+    private String token_ip;
+    
     @Value("${curriculo.telefone}")
     private String telefone;
     
@@ -19,7 +26,11 @@ public class ContatoService {
     @Value("${curriculo.token}")
     private String token;
     
-    public void sendMessage(Contato contato) {
+    public void sendMessage(HttpServletRequest request, Contato contato) {
+        String ipAddress = request.getHeader("X-FORWARDED-FOR");
+        if (ipAddress == null) {
+            ipAddress = request.getRemoteAddr();
+        }
         try {
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             
@@ -27,28 +38,32 @@ public class ContatoService {
             sb.append("id=");
             sb.append(telefone);
             sb.append("&message=");
-            sb.append(this.message(contato));
+            sb.append(this.message(contato, ipAddress));
             
             RequestBody body = RequestBody.create(mediaType, sb.toString());
-            Request request = new Request.Builder()
+            Request requestApi = new Request.Builder()
                 .url(api)
                 .method("POST", body)
                 .addHeader("Authorization", "Bearer " + token)
                 .addHeader("Content-Type", "application/x-www-form-urlencoded")
                 .build();
-            client.newCall(request).execute();
+            client.newCall(requestApi).execute();
         } catch (Exception e) {
             throw new CouldNotSendWhatsApp();
         }
     }
     
-    private String message(Contato contato) {
+    private String message(Contato contato, String ipAddress) throws RateLimitedException {
         StringBuilder sb = new StringBuilder();
+        IPinfo ipInfo = new IPinfo.Builder().setToken(token_ip).build();
+        
+        IPResponse response = ipInfo.lookupIP(ipAddress);
         
         sb.append("Nova mensagem do Currículo-API:\n\n");
         sb.append(contato.mensagem());
         sb.append("\n\nNome: ").append(contato.nome());
         sb.append("\nContato: ").append(contato.contato());
+        sb.append("\n\n" + response.getCity());
         
         return sb.toString();
     }
