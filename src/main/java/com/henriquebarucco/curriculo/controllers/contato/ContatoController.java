@@ -20,12 +20,15 @@ public class ContatoController {
 
     @Autowired
     private ContatoService contatoService;
+    
+    @Autowired
+    private HttpServletRequest request;
 
     @Operation(summary = "Entre em contato comigo.", description = "Envie uma mensagem agora mesmo para o meu WhatsApp, basta informar nos campos a mensagem e pronto, chegará em meu WhatsApp Pessoal.")
     @PostMapping(value = "/contato")
-    public ResponseEntity<String> curriculo(@Context HttpServletRequest request, @RequestParam String mensagem, @RequestParam String nome, @RequestParam String contato) {
+    public ResponseEntity<String> curriculo(@RequestParam String mensagem, @RequestParam String nome, @RequestParam String contato) {
         Contato sendContato = new Contato(mensagem, nome, contato);
         contatoService.sendMessage(request, sendContato);
-        return ResponseEntity.ok("Mensagem enviada com sucesso!");
+        return ResponseEntity.ok("Mensagem enviada com sucesso! " + request.getRemoteAddr());
     }
 }
