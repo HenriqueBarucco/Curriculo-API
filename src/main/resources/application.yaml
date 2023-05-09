@@ -10,6 +10,9 @@ swagger:
     
 curriculo:
     data: https://henriquebarucco.github.io/Curriculo-API/data.json
+    api: ${API_URL}
+    token: ${TOKEN}
+    telefone: ${TELEFONE}
 
 springdoc:
     swagger-ui:
