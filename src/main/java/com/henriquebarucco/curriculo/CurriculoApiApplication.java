@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 @OpenAPIDefinition(
-    info = @Info(title = "Currículo API", version = "1.0.0", description = "API para informações sobre o meu currículo.", termsOfService = "https://www.henriquebarucco.com.br"),
+    info = @Info(title = "Currículo API", version = "1.2.0", description = "API para informações sobre o meu currículo.", termsOfService = "https://www.henriquebarucco.com.br"),
     servers = {
         @Server(url = "https://curriculo-api.henriquebarucco.com.br", description = "Ambiente de produção"),
         @Server(url = "http://localhost:8080", description = "Ambiente de desenvolvimento")
