@@ -27,10 +27,6 @@ public class ContatoService {
     private String token;
     
     public void sendMessage(HttpServletRequest request, Contato contato) {
-        String ipAddress = request.getHeader("X-FORWARDED-FOR");
-        if (ipAddress == null) {
-            ipAddress = request.getRemoteAddr();
-        }
         try {
             MediaType mediaType = MediaType.parse("application/x-www-form-urlencoded");
             
@@ -38,7 +34,7 @@ public class ContatoService {
             sb.append("id=");
             sb.append(telefone);
             sb.append("&message=");
-            sb.append(this.message(contato, ipAddress));
+            sb.append(this.message(contato, request.getRemoteAddr()));
             
             RequestBody body = RequestBody.create(mediaType, sb.toString());
             Request requestApi = new Request.Builder()
