@@ -4,13 +4,10 @@ import com.henriquebarucco.curriculo.entities.contato.Contato;
 import com.henriquebarucco.curriculo.services.ContatoService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
-import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-
-import javax.ws.rs.core.Context;
 
 @EnableWebMvc
 @Tag(name = "Entre em contato", description = "Endpoints para buscar o Currículo inteiro ou apenas as partes necessárias.")
